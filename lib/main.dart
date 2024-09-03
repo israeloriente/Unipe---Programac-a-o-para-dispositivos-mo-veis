@@ -1,35 +1,27 @@
-void main() {
+main() {
   int result = 1;
+}
 
-  // Tipos de variaveis
-  int idade;
-  double altura;
-  num salario;
-  bool portaAberta = true;
-  String nome;
-  List nomes;
-  Map cadastro;
-  dynamic samba;
+void imprimirVerdades() {
+  print("Sport campeão de 1987");
+}
 
-  // Operadores
-  print(5 + 4);
-  print(5 - 4);
-  print(5 * 4);
-  print(5 / 4);
-  print(5 ~/ 4);
-  print("Sport " + " campeão de 1987");
-  print("2" + "2");
-  double x = 2.2;
-  print(++x);
-  print(x++);
-  x *= 1;
+void darBoasVindas(var nome, var idade) {
+  print("Bem vindo, $nome");
+}
 
-  // Concatenação
-  String time = "Sport";
-  print("$time é o verdadeiro campeão de 87");
-  print("Resultado da soma: ${5 + 6}");
+int somar(int num1, int num2) {
+  return (num1 + num2);
+}
 
-  String senha = "admin";
-  print("A primaira letra da senha: ${senha[0]}");
-  print("Minha variavel tem ${senha.length} caracteres");
+void testePoli([var p1, var p2]) {
+  print(p1);
+  print(p2);
+}
+
+String testeRetorno() => "Oba!";
+
+void testeOrdem({var nome, var idade}) {
+  print(nome);
+  print(idade);
 }
