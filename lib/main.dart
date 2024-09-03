@@ -1,26 +1,35 @@
-import 'package:flutter/material.dart';
-import 'aula-01.dart'; // Importa o widget MyHomePage
-
 void main() {
-  runApp(const MyApp());
-}
+  int result = 1;
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  // Tipos de variaveis
+  int idade;
+  double altura;
+  num salario;
+  bool portaAberta = true;
+  String nome;
+  List nomes;
+  Map cadastro;
+  dynamic samba;
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      initialRoute: "/",
-      routes: {
-        "/": (context) => const Class01(
-              title: "Home",
-            ),
-      },
-    );
-  }
+  // Operadores
+  print(5 + 4);
+  print(5 - 4);
+  print(5 * 4);
+  print(5 / 4);
+  print(5 ~/ 4);
+  print("Sport " + " campeão de 1987");
+  print("2" + "2");
+  double x = 2.2;
+  print(++x);
+  print(x++);
+  x *= 1;
+
+  // Concatenação
+  String time = "Sport";
+  print("$time é o verdadeiro campeão de 87");
+  print("Resultado da soma: ${5 + 6}");
+
+  String senha = "admin";
+  print("A primaira letra da senha: ${senha[0]}");
+  print("Minha variavel tem ${senha.length} caracteres");
 }
