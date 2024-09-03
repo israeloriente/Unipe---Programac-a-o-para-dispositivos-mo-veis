@@ -1,27 +1,31 @@
-main() {
-  int result = 1;
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
 }
 
-void imprimirVerdades() {
-  print("Sport campeão de 1987");
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(debugShowCheckedModeBanner: true, home: PaginaInicial());
+  }
 }
 
-void darBoasVindas(var nome, var idade) {
-  print("Bem vindo, $nome");
+class PaginaInicial extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+            title: Text('Gerador Aleatório'), backgroundColor: Colors.blue),
+        body: Center(child: Titulo()));
+  }
 }
 
-int somar(int num1, int num2) {
-  return (num1 + num2);
-}
-
-void testePoli([var p1, var p2]) {
-  print(p1);
-  print(p2);
-}
-
-String testeRetorno() => "Oba!";
-
-void testeOrdem({var nome, var idade}) {
-  print(nome);
-  print(idade);
+class Titulo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text('Número Aleatório', style: TextStyle(fontSize: 20)),
+    );
+  }
 }
