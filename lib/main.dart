@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,25 +8,35 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: true, home: PaginaInicial());
+    return CupertinoApp(
+      debugShowCheckedModeBanner: true,
+      home: PaginaInicial(),
+    );
   }
 }
 
 class PaginaInicial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-            title: Text(
-              'Gerador Aleatório',
-              style: TextStyle(color: Colors.white),
-            ),
-            backgroundColor: Colors.blue),
-        body: Center(
-            child: Column(
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text(
+          'Gerador Aleatório',
+          style: TextStyle(color: CupertinoColors.white),
+        ),
+        backgroundColor: CupertinoColors.activeBlue,
+      ),
+      child: Center(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Titulo(), SizedBox(height: 30), NumeroAleatorio()],
-        )));
+          children: [
+            Titulo(),
+            SizedBox(height: 30),
+            NumeroAleatorio(),
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -34,7 +44,11 @@ class Titulo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Text('Gerador de Números', style: TextStyle(fontSize: 20)));
+      child: Text(
+        'Gerador de Números',
+        style: TextStyle(fontSize: 20),
+      ),
+    );
   }
 }
 
@@ -56,12 +70,16 @@ class NumeroAleatorioState extends State<NumeroAleatorio> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Column(
-      children: [
-        Text("$numero", style: TextStyle(fontSize: 30)),
-        SizedBox(height: 10),
-        ElevatedButton(onPressed: gerarNumero, child: Text("Gerar Número"))
-      ],
-    ));
+      child: Column(
+        children: [
+          Text("$numero", style: TextStyle(fontSize: 30)),
+          SizedBox(height: 10),
+          CupertinoButton.filled(
+            onPressed: gerarNumero,
+            child: Text("Gerar Número"),
+          ),
+        ],
+      ),
+    );
   }
 }
