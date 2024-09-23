@@ -1,91 +1,58 @@
-import 'dart:math';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:unipe/widgets/custom_button.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() => runApp(MyApp());
+
+class BoasVindas extends StatefulWidget {
+  BoasVindasState createState() => BoasVindasState();
+}
+
+class BoasVindasState extends State<BoasVindas> {
+  String mensagem = "";
+  final controllerName = TextEditingController();
+
+  bool isValid() {
+    return controllerName.text == "sport1987" ? true : false;
+  }
+
+  Widget ValidText() {
+    return (controllerName.text != "")
+        ? (isValid() ? Text("É válido ✅") : Text("Inválido ❌"))
+        : SizedBox();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          SizedBox(height: 20),
+          TextField(
+            controller: controllerName,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: "Digite seu nome:",
+              hintText: 'Digite seu nome',
+            ),
+          ),
+          SizedBox(height: 20),
+          ElevatedButton(
+            child: Text("Enviar"),
+            onPressed: () => setState(() {}),
+          ),
+          SizedBox(height: 20),
+          ValidText()
+        ],
+      ),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-  @override
   Widget build(BuildContext context) {
-    return const CupertinoApp(
-      debugShowCheckedModeBanner: true,
-      home: PaginaInicial(),
-    );
-  }
-}
-
-class PaginaInicial extends StatelessWidget {
-  const PaginaInicial({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return const CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text(
-          'Gerador Aleatório',
-          style: TextStyle(color: CupertinoColors.white),
-        ),
-        backgroundColor: CupertinoColors.activeBlue,
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Titulo(),
-            SizedBox(height: 30),
-            NumeroAleatorio(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class Titulo extends StatelessWidget {
-  const Titulo({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return const Text(
-      'Gerador de Números',
-      style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
-    );
-  }
-}
-
-class NumeroAleatorio extends StatefulWidget {
-  const NumeroAleatorio({Key? key}) : super(key: key);
-  @override
-  NumeroAleatorioState createState() => NumeroAleatorioState();
-}
-
-class NumeroAleatorioState extends State<NumeroAleatorio> {
-  int numero = 0;
-  void gerarNumero() {
-    setState(() {
-      Random aleatorio = Random();
-      numero = aleatorio.nextInt(1000);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text("$numero", style: const TextStyle(fontSize: 30, color: Colors.grey)),
-        const SizedBox(height: 30),
-        CustomButton(
-          onPressed: () {
-            gerarNumero();
-          },
-          child: const Text(
-            "Gerar Número",
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-          ),
-        ),
-      ],
-    );
+    return MaterialApp(
+        home: Scaffold(
+            appBar: AppBar(
+                title: Text("Zé da manga"), backgroundColor: Colors.blue),
+            body: Column(children: [BoasVindas()])));
   }
 }
