@@ -1,58 +1,88 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
-
-class BoasVindas extends StatefulWidget {
-  BoasVindasState createState() => BoasVindasState();
+void main() {
+  runApp(MyApp());
 }
 
-class BoasVindasState extends State<BoasVindas> {
-  String mensagem = "";
-  final controllerName = TextEditingController();
-
-  bool isValid() {
-    return controllerName.text == "sport1987" ? true : false;
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        debugShowCheckedModeBanner: false, home: PaginaInicial());
   }
+}
 
-  Widget ValidText() {
-    return (controllerName.text != "")
-        ? (isValid() ? Text("É válido ✅") : Text("Inválido ❌"))
-        : SizedBox();
+class PaginaInicial extends StatefulWidget {
+  @override
+  PaginaInicialState createState() => new PaginaInicialState();
+}
+
+class PaginaInicialState extends State<PaginaInicial> {
+  int index = 0;
+
+  Widget mudarTela() {
+    switch (index) {
+      case 0:
+        return Container(
+          child: Text('Bem vindo a tela Principal'),
+        );
+      case 1:
+        return Container(
+          child: Text('Bem vindo a tela 1'),
+        );
+      case 2:
+        return Container(
+          child: Text('Bem vindo a tela 2'),
+        );
+      case 3:
+        return Container(
+          child: Text('Bem vindo a tela 3'),
+        );
+    }
+
+    return Text('');
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          SizedBox(height: 20),
-          TextField(
-            controller: controllerName,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Digite seu nome:",
-              hintText: 'Digite seu nome',
+    return new Scaffold(
+      appBar: new AppBar(title: new Text("Drawer")),
+      body: mudarTela(),
+      drawer: new Drawer(
+        child: new ListView(children: [
+          DrawerHeader(
+            child: Text('Drawer Header'),
+            decoration: BoxDecoration(
+              color: Colors.blue,
             ),
           ),
-          SizedBox(height: 20),
-          ElevatedButton(
-            child: Text("Enviar"),
-            onPressed: () => setState(() {}),
-          ),
-          SizedBox(height: 20),
-          ValidText()
-        ],
+          ListTile(
+              title: Text('Tela 1'),
+              onTap: () {
+                setState(() {
+                  index = 1;
+                });
+
+                Navigator.pop(context);
+              }),
+          ListTile(
+              title: Text('Tela 2'),
+              onTap: () {
+                setState(() {
+                  index = 2;
+                });
+                Navigator.pop(context);
+              }),
+          ListTile(
+              title: Text('Tela 3'),
+              onTap: () {
+                setState(() {
+                  index = 3;
+                });
+                Navigator.pop(context);
+              })
+        ]),
       ),
     );
-  }
-}
-
-class MyApp extends StatelessWidget {
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-            appBar: AppBar(
-                title: Text("Zé da manga"), backgroundColor: Colors.blue),
-            body: Column(children: [BoasVindas()])));
   }
 }
