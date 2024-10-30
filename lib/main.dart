@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:unipe/cambio.dart';
+import 'package:unipe/unidade.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,30 +25,30 @@ class PaginaInicialState extends State<PaginaInicial> {
   Widget mudarTela() {
     switch (index) {
       case 0:
-        return Container(
-          child: Text('Bem vindo a tela Principal'),
-        );
+        return Unidade();
       case 1:
-        return Container(
-          child: Text('Bem vindo a tela 1'),
-        );
-      case 2:
-        return Container(
-          child: Text('Bem vindo a tela 2'),
-        );
-      case 3:
-        return Container(
-          child: Text('Bem vindo a tela 3'),
-        );
+        return Cambio();
+      default:
+        return Text('');
     }
+  }
 
-    return Text('');
+  Widget item(title, idx) {
+    return ListTile(
+        title: Text(title),
+        onTap: () {
+          setState(() {
+            index = idx;
+          });
+
+          Navigator.pop(context);
+        });
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(title: new Text("Drawer")),
+      appBar: new AppBar(title: new Text("Home")),
       body: mudarTela(),
       drawer: new Drawer(
         child: new ListView(children: [
@@ -56,31 +58,8 @@ class PaginaInicialState extends State<PaginaInicial> {
               color: Colors.blue,
             ),
           ),
-          ListTile(
-              title: Text('Tela 1'),
-              onTap: () {
-                setState(() {
-                  index = 1;
-                });
-
-                Navigator.pop(context);
-              }),
-          ListTile(
-              title: Text('Tela 2'),
-              onTap: () {
-                setState(() {
-                  index = 2;
-                });
-                Navigator.pop(context);
-              }),
-          ListTile(
-              title: Text('Tela 3'),
-              onTap: () {
-                setState(() {
-                  index = 3;
-                });
-                Navigator.pop(context);
-              })
+          item("Conversor de Câmbio", 1),
+          item("Conversor de Unidade", 0),
         ]),
       ),
     );
