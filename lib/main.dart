@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:unipe/cambio.dart';
-import 'package:unipe/unidade.dart';
+import 'dart:convert';
 
 void main() {
   runApp(MyApp());
+}
+
+class Pessoa {
+  int id;
+  String nome;
+  int idade;
+
+  Pessoa({this.id = 0, this.nome = "", this.idade = 0});
+
+  // Ler um objeto JSON e criar um objeto DART a partir
+  // do JSON
+  factory Pessoa.fromJson(Map<String, dynamic> json) {
+    return Pessoa(id: json["id"], nome: json["nome"], idade: json["idade"]);
+  }
+
+  Map<String, dynamic> toJson() => {"id": id, "nome": nome, "idade": idade};
 }
 
 class MyApp extends StatelessWidget {
@@ -16,52 +31,34 @@ class MyApp extends StatelessWidget {
 
 class PaginaInicial extends StatefulWidget {
   @override
-  PaginaInicialState createState() => new PaginaInicialState();
+  PaginaInicialState createState() => PaginaInicialState();
 }
 
 class PaginaInicialState extends State<PaginaInicial> {
-  int index = 0;
+  var jsonTexto = '{"id":3, "nome": "Fumagalli", "idade": 5}';
 
-  Widget mudarTela() {
-    switch (index) {
-      case 0:
-        return Unidade();
-      case 1:
-        return Cambio();
-      default:
-        return Text('');
-    }
-  }
-
-  Widget item(title, idx) {
-    return ListTile(
-        title: Text(title),
-        onTap: () {
-          setState(() {
-            index = idx;
-          });
-
-          Navigator.pop(context);
-        });
-  }
+  var jsonTeste = {"id": 1, "nome": "Thyago Maia", "idade": 25};
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(title: new Text("Home")),
-      body: mudarTela(),
-      drawer: new Drawer(
-        child: new ListView(children: [
-          DrawerHeader(
-            child: Text('Drawer Header'),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-          ),
-          item("Conversor de Câmbio", 1),
-          item("Conversor de Unidade", 0),
-        ]),
-      ),
-    );
+    var pessoa = Pessoa.fromJson(jsonTeste);
+    var pessoa2 = Pessoa();
+    var textoParaJson = json.decode(jsonTexto);
+
+    pessoa2.id = 2;
+    pessoa2.nome = "Afonso";
+    pessoa2.idade = 32;
+
+    var pessoa3 = Pessoa.fromJson(textoParaJson);
+
+    var json2 = pessoa2.toJson();
+
+    return Scaffold(
+        appBar: AppBar(title: Text("Lendo um objeto JSON")),
+        body: Column(children: [
+          Text(pessoa3.id.toString()),
+          Text(pessoa3.nome),
+          Text(pessoa3.idade.toString()),
+        ]));
   }
 }
